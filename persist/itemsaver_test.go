@@ -7,7 +7,7 @@ import (
 
 	"gopkg.in/olivere/elastic.v5"
 
-	"github.com/XiaoZhangJian/MeiZiTu/model"
+	"github.com/XiaoZhangJian/Crawler/model"
 )
 
 func TestSaver(t *testing.T) {

@@ -3,7 +3,7 @@ package engine
 import (
 	"log"
 
-	"github.com/XiaoZhangJian/MeiZiTu/fetcher"
+	"github.com/XiaoZhangJian/Crawler/fetcher"
 )
 
 type SimpleEngine struct{}

@@ -1,6 +1,6 @@
 package scheduler
 
-import "github.com/XiaoZhangJian/MeiZiTu/engine"
+import "github.com/XiaoZhangJian/Crawler/engine"
 
 type SimpleScheduler struct {
 	workerChan chan engine.Request

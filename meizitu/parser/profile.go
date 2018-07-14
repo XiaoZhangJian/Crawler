@@ -3,8 +3,8 @@ package parser
 import (
 	"regexp"
 
-	"github.com/XiaoZhangJian/MeiZiTu/engine"
-	"github.com/XiaoZhangJian/MeiZiTu/model"
+	"github.com/XiaoZhangJian/Crawler/engine"
+	"github.com/XiaoZhangJian/Crawler/model"
 )
 
 var (

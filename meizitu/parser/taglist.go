@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"regexp"
 
-	"github.com/XiaoZhangJian/MeiZiTu/engine"
+	"github.com/XiaoZhangJian/Crawler/engine"
 )
 
 const (

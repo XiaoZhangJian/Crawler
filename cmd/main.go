@@ -1,10 +1,10 @@
 package main
 
 import (
-	"github.com/XiaoZhangJian/MeiZiTu/engine"
-	"github.com/XiaoZhangJian/MeiZiTu/meizitu/parser"
-	"github.com/XiaoZhangJian/MeiZiTu/persist"
-	"github.com/XiaoZhangJian/MeiZiTu/scheduler"
+	"github.com/XiaoZhangJian/Crawler/engine"
+	"github.com/XiaoZhangJian/Crawler/meizitu/parser"
+	"github.com/XiaoZhangJian/Crawler/persist"
+	"github.com/XiaoZhangJian/Crawler/scheduler"
 )
 
 func main() {

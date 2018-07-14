@@ -1,6 +1,6 @@
 package scheduler
 
-import "github.com/XiaoZhangJian/MeiZiTu/engine"
+import "github.com/XiaoZhangJian/Crawler/engine"
 
 type QueuedScheduler struct {
 	requestChan chan engine.Request

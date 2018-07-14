@@ -6,7 +6,7 @@ import (
 	"log"
 	"testing"
 
-	"github.com/XiaoZhangJian/MeiZiTu/model"
+	"github.com/XiaoZhangJian/Crawler/model"
 )
 
 func TestProfile(t *testing.T) {
