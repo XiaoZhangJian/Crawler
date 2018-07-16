@@ -8,21 +8,23 @@ import (
 )
 
 var (
-	ProfileRe = regexp.MustCompile(`<a href="(https://www.dbmeinv.com:443/dbgroup/[1-9]\d*)" +[^>]*>([^<]+)</a>`)
+	TopicsRe = regexp.MustCompile(`<a href="(https://www.dbmeinv.com:443/dbgroup/[1-9]\d*)" +[^>]*>([^<]+)</a>`)
 
 	NextTagRe = regexp.MustCompile(`<li class="next next_page"><a href="(.*?)" title="(.*?)">[^<]+</a></li>`)
 )
 
-func Tag(contents []byte) engine.ParserResult {
+func Tag(contents []byte, category string) engine.ParserResult {
 
-	req := ProfileRe.FindAllSubmatch(contents, -1)
+	req := TopicsRe.FindAllSubmatch(contents, -1)
+
 	result := engine.ParserResult{}
 	for _, m := range req {
-		title := string(m[2])
+
+		url := string(m[1])
 		result.Requests = append(result.Requests, engine.Request{
-			Url: string(m[1]),
+			Url: url,
 			ParserFunc: func(contents []byte) engine.ParserResult {
-				return Profile(contents, title)
+				return Topics(contents, category, url)
 			},
 		})
 	}
@@ -33,10 +35,11 @@ func Tag(contents []byte) engine.ParserResult {
 		if string(n[2]) == "下一页" {
 			url := fmt.Sprintf("https://www.dbmeinv.com:443%s", n[1])
 			result.Requests = append(result.Requests, engine.Request{
-				Url:        url,
-				ParserFunc: Tag,
+				Url: url,
+				ParserFunc: func(c []byte) engine.ParserResult {
+					return Tag(c, category)
+				},
 			})
-
 		}
 	}
 

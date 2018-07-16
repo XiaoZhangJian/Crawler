@@ -17,13 +17,13 @@ func TagList(contents []byte) engine.ParserResult {
 	result := engine.ParserResult{}
 	for _, m := range req {
 		category := string(m[2])
-		fmt.Printf("分组：%s \n", category)
-		fmt.Printf("URL %s ", fmt.Sprintf("https://www.dbmeinv.com:443/dbgroup/show.htm?cid=%s", m[1]))
-
-		// result.Items = append(result.Items, "Tag --> "+category)
+		// fmt.Printf("分组：%s \n", category)
+		// fmt.Printf("URL %s ", fmt.Sprintf("https://www.dbmeinv.com:443/dbgroup/show.htm?cid=%s", m[1]))
 		result.Requests = append(result.Requests, engine.Request{
-			Url:        fmt.Sprintf("https://www.dbmeinv.com:443/dbgroup/show.htm?cid=%s", m[1]),
-			ParserFunc: Tag,
+			Url: fmt.Sprintf("https://www.dbmeinv.com:443/dbgroup/show.htm?cid=%s", m[1]),
+			ParserFunc: func(contents []byte) engine.ParserResult {
+				return Tag(contents, category)
+			},
 		})
 	}
 	return result

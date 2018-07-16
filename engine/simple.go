@@ -8,6 +8,9 @@ import (
 
 type SimpleEngine struct{}
 
+/*
+	非并发版实现
+*/
 func (s SimpleEngine) Run(seeds ...Request) {
 	var requests []Request
 
@@ -32,11 +35,9 @@ func (s SimpleEngine) Run(seeds ...Request) {
 }
 
 func worker(r Request) (ParserResult, error) {
-	// log.Printf("Fetcher %s ", r.Url)
 	body, err := fetcher.Fetch(r.Url)
 	if err != nil {
 		log.Printf("Fetcher error,  r.url : %s , err : %v \t", r.Url, err)
-
 		return ParserResult{}, err
 	}
 

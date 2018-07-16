@@ -1,6 +1,7 @@
 package parser
 
 import (
+	"fmt"
 	"regexp"
 
 	"github.com/XiaoZhangJian/Crawler/engine"
@@ -18,31 +19,36 @@ var (
 	categoryRe = regexp.MustCompile(`cid=(.*?)">(.*?)</a>`)
 )
 
-func Profile(contents []byte, name string) engine.ParserResult {
-	profile := model.Profile{}
-	profile.UserName = extractString(contents, userNameRe)
-	profile.Avatar = extractString(contents, avatarRe)
-	profile.PushTitle = name //extractString(contents, pushTitleRe)
-	profile.PushAt = extractString(contents, pushAtRe)
+func Topics(contents []byte, category string, url string) engine.ParserResult {
+	topics := model.Topics{}
+	topics.UserName = extractString(contents, userNameRe)
+	topics.Avatar = extractString(contents, avatarRe)
+	topics.PushTitle = extractString(contents, pushTitleRe)
+	topics.PushAt = extractString(contents, pushAtRe)
 	pushText := pushTextRe.FindAllSubmatch(contents, -1)
 	for _, t := range pushText {
 		text := string(t[1])
 		if text != "我就是测试回复一下的" {
-			profile.PushText = append(profile.PushText, text)
+			topics.PushText = append(topics.PushText, text)
 		}
 
 	}
 
+	topics.Category = category
+	topics.TopicesUrl = url
+
 	pushImg := pushImgRe.FindAllSubmatch(contents, -1)
 	for _, m := range pushImg {
-		profile.PushImgs = append(profile.PushImgs, string(m[1]))
+		topics.PushImgs = append(topics.PushImgs, string(m[1]))
 	}
 
 	categoryRe.FindAllSubmatch(contents, -1)
 
 	result := engine.ParserResult{
-		Items: []interface{}{profile},
+		Items: []interface{}{topics},
 	}
+
+	fmt.Printf("============  ====  %+v", topics)
 
 	return result
 }

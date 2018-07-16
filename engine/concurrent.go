@@ -21,6 +21,9 @@ type ReadyNotifier interface {
 	WorkerReady(chan Request)
 }
 
+/*
+	并发版实现
+*/
 func (c *ConcurrentEngine) Run(seeds ...Request) {
 
 	out := make(chan ParserResult)
